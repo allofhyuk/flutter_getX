@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/instance_manager.dart';
 import 'package:getx/pages/dashboard/dashboard_controller.dart';
+import 'package:getx/pages/third/third_page.dart';
 import 'package:getx/routing/router.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -19,7 +20,7 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Starting',
+          'Auth flow',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: false,
@@ -36,7 +37,12 @@ class DashboardPage extends StatelessWidget {
                         onPressed: () {
                           _controller.addLike();
                         },
-                        child: Text('add like button'))
+                        child: Text('ex button')),
+                    ElevatedButton(
+                        onPressed: () {
+                          Get.to(ThirdPage());
+                        },
+                        child: Text('페이지 이동'))
                   ],
                 ))),
       ),
