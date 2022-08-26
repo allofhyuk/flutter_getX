@@ -8,19 +8,14 @@ import 'package:getx/pages/dashboard/dashboard_controller.dart';
 import 'package:getx/routing/router.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  DashboardPage({Key? key}) : super(key: key);
   // get controller
+  final DashboardController _controller = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
     print('1. dashboard page build');
-    final controller = Get.put(DashboardController());
-    final routeController = Get.put(RouterController(navTypes: [
-      NavTypes.home,
-      NavTypes.community,
-      NavTypes.report,
-      NavTypes.myPage,
-    ]));
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -32,25 +27,19 @@ class DashboardPage extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Container(
-        child: Text(controller.user().name),
-      ),
-      bottomNavigationBar: Obx(() => BottomAppBar(
-            child: SizedBox(
-              width: double.infinity,
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  for (int i = 0; i < routeController.routeList.length; i++)
-                    IconButton(
+        child: Center(
+            child: Obx(() => Column(
+                  children: [
+                    Text(_controller.user().name),
+                    Text(_controller.user().like.toString()),
+                    ElevatedButton(
                         onPressed: () {
-                          routeController.changeRouteIndex(i);
+                          _controller.addLike();
                         },
-                        icon: Icon(Icons.tab))
-                ],
-              ),
-            ),
-          )),
+                        child: Text('add like button'))
+                  ],
+                ))),
+      ),
     );
   }
 }
